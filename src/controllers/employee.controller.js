@@ -144,4 +144,132 @@ const deleteEmployee = async (req, res) => {
     }
 };
 
-export { addEmployee, getAllEmployees, updateEmplyoeInfo, deleteEmployee };
+const filterWithDepartment = async (req, res) => {
+    try {
+        const { department } = req.query;
+
+        if (!department || !department.trim()) {
+            return res.status(400).json({
+                success: false,
+                message: "Department is required"
+            })
+        }
+
+        const db = req.db;
+
+        const employees = await db
+            .collection("employees")
+            .find({ department })
+            .toArray();
+
+        if (employees.length === 0) {
+            return res.status(404).json({
+                success: false,
+                message: `No employees found in ${department} department`
+            })
+        }
+
+        return res.status(200).json({
+            success: true,
+            message: "Employees fetched successfully",
+            data: employees
+        })
+    } catch (error) {
+        console.log("Error while filtering employees by department:", error);
+
+        return res.status(500).json({
+            success: false,
+            message: "Something went wrong while filtering employees !!"
+        });
+    }
+}
+
+const filterWithPosition = async (req, res) => {
+    try {
+        const { position } = req.query;
+
+        if (!position || !position.trim()) {
+            return res.status(400).json({
+                success: false,
+                message: "Posistion is required"
+            })
+        }
+
+        const db = req.db;
+
+        const employees = await db
+            .collection("employees")
+            .find({ position })
+            .toArray();
+
+        if (employees.length === 0) {
+            return res.status(404).json({
+                success: false,
+                message: `No employees found in ${position} position`
+            })
+        }
+
+        return res.status(200).json({
+            success: true,
+            message: "Employees fetched successfully",
+            data: employees
+        })
+    } catch (error) {
+        console.log("Error while filtering employees by position:", error);
+
+        return res.status(500).json({
+            success: false,
+            message: "Something went wrong while filtering employees !!"
+        });
+    }
+}
+
+const findEmployeeWithName = async (req, res) => {
+    try {
+        const { name } = req.query;
+
+        if (!name || !name.trim()) {
+            return res.status(400).json({
+                success: false,
+                message: "Name is required"
+            })
+        }
+
+        const db = req.db;
+
+        const employees = await db
+            .collection("employees")
+            .find({ name })
+            .toArray();
+
+        if (employees.length === 0) {
+            return res.status(404).json({
+                success: false,
+                message: `No employee found with this name: ${name}`
+            })
+        }
+
+        return res.status(200).json({
+            success: true,
+            message: "Employee fetched successfully",
+            data: employees
+        })
+    } catch (error) {
+        console.log("Error while finding employee by name:", error);
+
+        return res.status(500).json({
+            success: false,
+            message: "Something went wrong while searching employee by name !!"
+        });
+    }
+}
+
+export {
+    addEmployee,
+    getAllEmployees,
+    updateEmplyoeInfo,
+    deleteEmployee,
+    filterWithDepartment,
+    filterWithPosition,
+    findEmployeeWithName
+};
