@@ -67,7 +67,6 @@ Add your MongoDB Atlas connection string:
 
 ```
 MONGODB_URI=your_mongodb_connection_string
-PORT=4000
 CORS_ORIGIN=*
 ```
 
@@ -141,6 +140,21 @@ DELETE /api/v1/employees/delete/:employeeId
   }
 }
 ```
+
+## Additional API Endpoints (Filters)
+
+### 🔍 Filter Employees by Department
+
+**GET** `/api/v1/employees/filter?department=DEPARTMENT_NAME`
+
+### 🎯 Filter Employees by Position
+
+**GET** `/api/v1/employees/position?position=POSITION_NAME`
+
+### 🧑‍🔎 Search Employee by Name
+
+**GET** `/api/v1/employees/search?name=EMPLOYEE_NAME`
+
 
 ---
 
