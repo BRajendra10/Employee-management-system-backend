@@ -155,6 +155,11 @@ DELETE /api/v1/employees/delete/:employeeId
 
 **GET** `/api/v1/employees/search?name=EMPLOYEE_NAME`
 
+---
+
+## Links
+
+FRONTED REPO:- [FRONTEND](https://github.com/BRajendra10/Employee-management-system-frontend)
 
 ---
 
